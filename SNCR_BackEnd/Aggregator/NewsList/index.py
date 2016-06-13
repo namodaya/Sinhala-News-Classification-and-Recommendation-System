@@ -29,10 +29,11 @@ class main(Resource):
         print news
         # print the rows
         for row in news:
+            spltDescription = unicode(row[3]).split("<a")
             newsList.append({
                 'title': row[1],
                 'link': row[2],
-                'description': row[3],
+                'description': spltDescription[0],
                 'image':row[4]
             })
 
