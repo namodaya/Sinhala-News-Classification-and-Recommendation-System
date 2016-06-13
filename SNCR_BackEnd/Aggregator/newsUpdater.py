@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 # from mysql import (connection)
 from mysql.connector import (connection)
 
-db = connection.MySQLConnection(user='root', password='1234',
+db = connection.MySQLConnection(user='root', password='ilovepera',
                                 host='127.0.0.1',
                                 database='NewsData',
                                 charset='utf8')

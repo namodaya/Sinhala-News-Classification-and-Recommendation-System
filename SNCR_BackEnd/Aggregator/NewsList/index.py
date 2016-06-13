@@ -6,7 +6,7 @@ from mysql.connector import (connection)
 
 class main(Resource):
     def get(self, Category):
-        db = connection.MySQLConnection(user='root', password='1234',
+        db = connection.MySQLConnection(user='root', password='ilovepera',
                                          host='127.0.0.1',
                                          database='NewsData',
                                          charset='utf8')
@@ -34,7 +34,9 @@ class main(Resource):
                 'title': row[1],
                 'link': row[2],
                 'description': spltDescription[0],
-                'image':row[4]
+                'image': row[4],
+                'articleId': row[6]
+
             })
 
         db.close()

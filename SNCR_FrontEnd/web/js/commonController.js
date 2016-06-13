@@ -13,6 +13,23 @@ SNCR_app.controller("commonController", function ($scope, $http, $filter) {
                     console.log('Item request ERR ' + err);
                 })
     };
-    console.log("common is running");
+
+    $scope.sendUserHistory = function (userId, articleId) {
+
+        var data = {
+            "UserId": userId,
+            "ArticleId": articleId
+        };
+        var url = 'http://127.0.0.1:5000/userHistory';
+        $http
+            .post(url, data)
+            .then(
+                function (resp) {
+                    console.log(data)
+                },
+                function (err) {
+                    console.error(err);
+                });
+    }
 
 });

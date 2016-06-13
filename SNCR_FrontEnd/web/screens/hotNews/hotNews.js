@@ -7,6 +7,9 @@ SNCR_app.controller("hotNews", function ($scope, $controller, $http, $filter) {
     }));
 
     $scope.getNews('hotNews');
+    console.log('hotnews get called');
+
+
 
 
 });
