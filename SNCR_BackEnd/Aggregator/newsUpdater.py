@@ -10,18 +10,18 @@ from bs4 import BeautifulSoup
 # from mysql import (connection)
 from mysql.connector import (connection)
 
-db = connection.MySQLConnection(user='root', password='',
+db = connection.MySQLConnection(user='root', password='ilovepera',
                                 host='127.0.0.1',
-                                database='newsdata',
+                                database='NewsData',
                                 charset='utf8')
 
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
 # Drop table if it already exist using execute() method.
-cursor.execute("DROP TABLE IF EXISTS newsorder")
+cursor.execute("DROP TABLE IF EXISTS NewsOrder")
 
 # Create table as per requirement
-sql = """CREATE TABLE newsorder (ID int NOT NULL AUTO_INCREMENT, title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), imgLink VARCHAR(11000), category VARCHAR(100), newsId int, PRIMARY KEY (ID)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
+sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT, title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), imgLink VARCHAR(11000), category VARCHAR(100), newsId int, PRIMARY KEY (ID)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
 
 cursor.execute(sql)
 
@@ -63,7 +63,7 @@ def job():
 
         length=len(entry['link'].split('/'))
 
-        sql1="SELECT * FROM newsOrder WHERE newsId >= '%s'"%(entry['link'].split('/')[length-1])
+        sql1="SELECT * FROM NewsOrder WHERE newsId >= '%s'"%(entry['link'].split('/')[length-1])
         cursor.execute(sql1)
         result=cursor.fetchall()
         if len(result)==0:
