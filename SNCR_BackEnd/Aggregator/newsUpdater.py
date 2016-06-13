@@ -18,7 +18,7 @@ db = connection.MySQLConnection(user='root', password='ilovepera',
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
 # Drop table if it already exist using execute() method.
-cursor.execute("DROP TABLE IF EXISTS NewsOrder")
+# cursor.execute("DROP TABLE IF EXISTS NewsOrder")
 
 # Create table as per requirement
 sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT, title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), imgLink VARCHAR(11000), category VARCHAR(100), newsId int, PRIMARY KEY (ID)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
