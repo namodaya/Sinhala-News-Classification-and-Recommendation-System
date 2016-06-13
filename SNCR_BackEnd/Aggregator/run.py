@@ -17,7 +17,7 @@ api = Api(app)
 CORS(app)
 api.add_resource(main, '/category/<string:Category>', endpoint='/')
 api.add_resource(Login, '/login')
-api.add_resource(userData, '/user')
+api.add_resource(userData, '/userHistory')
 
 def get_user_data(access_token):
     headers = {'Content-Type': 'text/html'}
