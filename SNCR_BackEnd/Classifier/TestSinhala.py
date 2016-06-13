@@ -57,7 +57,7 @@ with io.open(tamFile, 'r', encoding=('utf-8-sig')) as f:
 
 cl = Classifier(spamKB, hamKB,jamKB,pamKB,tamKB)
 
-db = connection.MySQLConnection(user='root', password='',
+db = connection.MySQLConnection(user='root', password='ilovepera',
                                 host='127.0.0.1',
                                 database='NewsData',
                                 charset='utf8')
