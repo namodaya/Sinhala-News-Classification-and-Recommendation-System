@@ -3,7 +3,8 @@ from mysql.connector import (connection)
 
 class userData(Resource):
     def post(self):
-        db = connection.MySQLConnection(user='root', password='1234',
+        json_obj = request.get_json()
+        db = connection.MySQLConnection(user='root', password='ilovepera',
                                         host='127.0.0.1',
                                         database='NewsData',
                                         charset='utf8')
@@ -12,7 +13,7 @@ class userData(Resource):
         cursor = db.cursor()
 
         sql = "INSERT INTO UserHistory(UserId,ArticleId) VALUES ('%s','%s') " % (
-            request.form["UserId"],request.form["ArticleId"])
+            json_obj["UserId"],json_obj["ArticleId"])
 
         try:
             cursor.execute(sql)
