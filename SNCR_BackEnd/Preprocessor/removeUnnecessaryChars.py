@@ -12,13 +12,13 @@ cursor = db.cursor()
 
 sql = "SELECT title FROM NewsOrder"
 cursor.execute(sql)
-news = cursor.fetchall()
+title = cursor.fetchall()
 
 cyril = re.compile(u"[\u0021-\u007F]+", re.UNICODE)
 # plainText = cyril.sub('',news)
 #
 # print plainText
 
-for row in news:
+for row in title:
     plainText = cyril.sub('', row[0])
     print plainText
