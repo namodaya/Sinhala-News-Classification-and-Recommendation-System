@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 # from mysql import (connection)
 from mysql.connector import (connection)
 
-db = connection.MySQLConnection(user='root', password='ilovepera',
+db = connection.MySQLConnection(user='root', password='1234',
                                 host='127.0.0.1',
                                 database='NewsData',
                                 charset='utf8')
@@ -21,7 +21,7 @@ cursor = db.cursor()
 cursor.execute("DROP TABLE IF EXISTS NewsOrder")
 
 # Create table as per requirement
-sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT, title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), imgLink VARCHAR(11000), category VARCHAR(100), newsId int, PRIMARY KEY (ID)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
+sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT, title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), imgLink VARCHAR(11000), category VARCHAR(100), newsContent VARCHAR (1000), newsId int, PRIMARY KEY (ID)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
 
 cursor.execute(sql)
 
@@ -41,11 +41,14 @@ for entry in feed['items']:
     res = urllib2.urlopen(content).read()
     soup = BeautifulSoup(res, "html.parser")
 
-    rows = soup.find_all('div', attrs={"class": "latest-pic"})
-    ans = re.findall('"([^"]*)"', str(rows))
+    imageRows = soup.find_all('div', attrs={"class": "latest-pic"})
+    imageDetails = re.findall('"([^"]*)"', str(imageRows))
 
-    sql = "INSERT INTO NewsOrder(title,link,description,imgLink,category,newsId) VALUES ('%s','%s','%s','%s','%s','%s') " % (
-        entry['title'], entry['link'], entry['description'], ans[2], 'null', entry['link'].split('/')[length - 1])
+    newsContentRows = soup.find_all('div', attrs={"class": "lts-txt2"})
+
+
+    sql = "INSERT INTO NewsOrder(title,link,description,imgLink,category,newsContent,newsId) VALUES ('%s','%s','%s','%s','%s','%s','%s') " % (
+        entry['title'], entry['link'], entry['description'], imageDetails[2], 'null',repr(imageRows), entry['link'].split('/')[length - 1])
 
     try:
         cursor.execute(sql)
@@ -95,7 +98,7 @@ def job():
                 db.rollback()
 
 
-schedule.every(0.1).minutes.do(job)
+schedule.every(10).minutes.do(job)
 
 while 1:
     schedule.run_pending()
