@@ -1,12 +1,13 @@
 import feedparser
 from flask_restful import Resource
+from SNCR_BackEnd.Aggregator.DAO import *
 
 from mysql.connector import (connection)
 
 
 class main(Resource):
     def get(self, Category):
-        db = connection.MySQLConnection(user='root', password='ilovepera',
+        db = connection.MySQLConnection(user='root', password='1234',
                                          host='127.0.0.1',
                                          database='NewsData',
                                          charset='utf8')
@@ -16,14 +17,13 @@ class main(Resource):
 
         print Category
 
+        dao = DAO()
+
         if (Category=='hotNews'):
-            sql = "SELECT * FROM NewsOrder"
+            news = dao.getHotNews()
         else:
-            sql = "SELECT * FROM NewsOrder WHERE category = '%s'"%(Category);
+            news = dao.getHotNews()
 
-
-        cursor.execute(sql)
-        news = cursor.fetchall()
         newsList = []
 
         print news

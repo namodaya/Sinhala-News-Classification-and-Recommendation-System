@@ -4,7 +4,7 @@ from mysql.connector import (connection)
 class userData(Resource):
     def post(self):
         json_obj = request.get_json()
-        db = connection.MySQLConnection(user='root', password='ilovepera',
+        db = connection.MySQLConnection(user='root', password='1234',
                                         host='127.0.0.1',
                                         database='NewsData',
                                         charset='utf8')
