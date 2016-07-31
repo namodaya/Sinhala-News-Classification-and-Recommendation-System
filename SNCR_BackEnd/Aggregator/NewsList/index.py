@@ -2,21 +2,9 @@ import feedparser
 from flask_restful import Resource
 from SNCR_BackEnd.Aggregator.DAO import *
 
-from mysql.connector import (connection)
-
 
 class main(Resource):
     def get(self, Category):
-        db = connection.MySQLConnection(user='root', password='1234',
-                                         host='127.0.0.1',
-                                         database='NewsData',
-                                         charset='utf8')
-
-        # prepare a cursor object using cursor() method
-        cursor = db.cursor()
-
-        print Category
-
         dao = DAO()
 
         if (Category=='hotNews'):
@@ -39,6 +27,5 @@ class main(Resource):
 
             })
 
-        db.close()
         return (newsList)
 
