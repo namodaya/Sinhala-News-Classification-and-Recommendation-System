@@ -1,22 +1,27 @@
 import ConfigParser
-Config = ConfigParser.ConfigParser()
+import os
 
-Config.read("config.ini")
+class ConfigSectionMap:
+
+    def _get_config(self):
+        Config = ConfigParser.ConfigParser()
+        return Config
 
 
-def ConfigSectionMap(section):
-    dict1 = {}
-    options = Config.options(section)
-    for option in options:
-        try:
-            dict1[option] = Config.get(section, option)
-            if dict1[option] == -1:
-                print("skip: %s" % option)
-        except:
-            print("exception on %s!" % option)
-            dict1[option] = None
-    return dict1
+    def ConfigSectionMap(self,section):
+        Config = self._get_config()
+        absPath = os.path.join(os.path.dirname(__file__), 'config.ini')
 
-link = ConfigSectionMap("HiruNews")['link']
-
-print link
+        Config.read(absPath)
+        print Config.sections()
+        dict1 = {}
+        options = Config.options(section)
+        for option in options:
+            try:
+                dict1[option] = Config.get(section, option)
+                if dict1[option] == -1:
+                    print("skip: %s" % option)
+            except:
+                print("exception on %s!" % option)
+                dict1[option] = None
+        return dict1

@@ -26,7 +26,7 @@ class DAO:
         cursor.execute("DROP TABLE IF EXISTS NewsOrder")
 
         # Create table as per requirement
-        sql = """CREATE TABLE NewsOrder (
+        sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT,
                         title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), pubDate VARCHAR(1000), category VARCHAR(10)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
         cursor.execute(sql)
 

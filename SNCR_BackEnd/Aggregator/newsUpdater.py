@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 # from mysql import (connection)
 from mysql.connector import (connection)
 
+from SNCR_BackEnd.configSectionMap import *
+
 db = connection.MySQLConnection(user='root', password='1234',
                                 host='127.0.0.1',
                                 database='NewsData',
@@ -25,10 +27,13 @@ sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT, title  VARCHAR(
 
 cursor.execute(sql)
 
+configSectionMap = ConfigSectionMap()
+
+link = configSectionMap.ConfigSectionMap("HiruNews")['link']
+
 # when first time accessing the news site
 
-feed = feedparser.parse('http://www.hirunews.lk/rss/sinhala.xml')
-
+feed = feedparser.parse(link)
 for entry in feed['items']:
 
     length = len(entry['link'].split('/'))
