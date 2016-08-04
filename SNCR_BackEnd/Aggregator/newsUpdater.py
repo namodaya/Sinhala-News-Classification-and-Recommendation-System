@@ -30,7 +30,7 @@ cursor.execute(sql)
 configSectionMap = ConfigSectionMap()
 
 link = configSectionMap.ConfigSectionMap("HiruNews")['link']
-
+classsName = configSectionMap.ConfigSectionMap("HiruNews")['classname']
 # when first time accessing the news site
 
 feed = feedparser.parse(link)
@@ -49,15 +49,16 @@ for entry in feed['items']:
     imageRows = soup.find_all('div', attrs={"class": "latest-pic"})
     imageDetails = re.findall('"([^"]*)"', str(imageRows))
 
-    newsContentRows = soup.find_all('div', attrs={"class": "lts-txt2"})
+    newsContentRows = soup.find_all('div', attrs={"class": classsName})
 
 
     sql = "INSERT INTO NewsOrder(title,link,description,imgLink,category,newsContent,newsId) VALUES ('%s','%s','%s','%s','%s','%s','%s') " % (
-        entry['title'], entry['link'], entry['description'], imageDetails[2], 'null',repr(imageRows), entry['link'].split('/')[length - 1])
+        entry['title'], entry['link'], entry['description'].split('<a')[0], imageDetails[2], 'null',repr(imageRows), entry['link'].split('/')[length - 1])
 
     try:
         cursor.execute(sql)
         db.commit()
+        print entry['link'].split('/')
         print("Scheduler is running.......")
     except Exception as e:
         print e
@@ -97,13 +98,14 @@ def job():
             try:
                 cursor.execute(sql)
                 db.commit()
+                print 'yasas'
                 print("Scheduler is running.......")
             except:
                 # Rollback in case there is any error
                 db.rollback()
 
 
-schedule.every(10).minutes.do(job)
+schedule.every(1).minutes.do(job)
 
 while 1:
     schedule.run_pending()
