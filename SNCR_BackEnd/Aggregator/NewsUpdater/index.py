@@ -11,8 +11,8 @@ newsContentClassName = configSectionMap.ConfigSectionMap("HiruNews")['newsconten
 imageClassName = configSectionMap.ConfigSectionMap("HiruNews")['imageclassname']
 
 newsUpdater = newsUpdater()
-schedule.every(0.5).minutes.do(newsUpdater.job,link,newsContentClassName, imageClassName)
+schedule.every(0.1).minutes.do(newsUpdater.job,link,newsContentClassName, imageClassName)
 
 while 1:
     schedule.run_pending()
-    time.sleep(0.5)
+    time.sleep(0.1)

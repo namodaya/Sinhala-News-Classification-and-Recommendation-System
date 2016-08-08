@@ -13,7 +13,6 @@ class ConfigSectionMap:
         absPath = os.path.join(os.path.dirname(__file__), 'config.ini')
 
         Config.read(absPath)
-        print Config.sections()
         dict1 = {}
         options = Config.options(section)
         for option in options:

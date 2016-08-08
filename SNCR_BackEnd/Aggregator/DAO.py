@@ -40,9 +40,9 @@ class DAO:
         return newsList
 
     def insertNews(self,title,link,description,imgLink,category,newsId):
-
         cursor = self._get_cursor()
-        sql = """INSERT INTO NewsOrder(title,link,description,imgLink,category,newsId) VALUES ('%s','%s','%s','%s','%s','%s') """ ,(title, link, description, imgLink, category,newsId)
+        sql = "INSERT INTO NewsOrder(title,link,description,imgLink,category,newsId) VALUES ('%s','%s','%s','%s','%s','%s') " %(
+            title, link, description, imgLink, category,newsId)
 
         cursor.execute(sql)
 

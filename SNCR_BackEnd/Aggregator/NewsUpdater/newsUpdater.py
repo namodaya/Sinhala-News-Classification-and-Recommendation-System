@@ -48,10 +48,7 @@ class newsUpdater:
 
                 newsContentRows = soup.find_all('div', attrs={"class": newsContentClassName})
                 dao = DAO()
-                print 'inside if condition'
                 dao.insertNews(entry['title'], entry['link'], entry['description'].split('<a')[0], imageDetails[2], 'null',entry['link'].split('/')[length - 1])
-
-                print entry['title']
 
             else:
                 print 'No new news'
