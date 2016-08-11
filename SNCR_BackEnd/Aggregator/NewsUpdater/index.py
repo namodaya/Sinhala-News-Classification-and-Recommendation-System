@@ -2,17 +2,23 @@ import schedule
 import time
 
 from SNCR_BackEnd.configSectionMap import *
-from newsUpdater import *
+from SNCR_BackEnd.Aggregator.NewsUpdater.newsUpdater import *
 
 configSectionMap = ConfigSectionMap()
-
-link = configSectionMap.ConfigSectionMap("HiruNews")['link']
-newsContentClassName = configSectionMap.ConfigSectionMap("HiruNews")['newscontentclassname']
-imageClassName = configSectionMap.ConfigSectionMap("HiruNews")['imageclassname']
-
 newsUpdater = newsUpdater()
-schedule.every(0.1).minutes.do(newsUpdater.job,link,newsContentClassName, imageClassName)
+
+def schedularRunner():
+
+    sectionsArr = configSectionMap.GetConfigSections()
+    for section in sectionsArr:
+        link = configSectionMap.ConfigSectionMap(section)['link']
+        newsContentClassName = configSectionMap.ConfigSectionMap(section)['newscontentclassname']
+        imageClassName = configSectionMap.ConfigSectionMap(section)['imageclassname']
+
+        newsUpdater.job(link,newsContentClassName, imageClassName)
+
+schedule.every(60).minutes.do(schedularRunner)
 
 while 1:
     schedule.run_pending()
-    time.sleep(0.1)
+    time.sleep(60)

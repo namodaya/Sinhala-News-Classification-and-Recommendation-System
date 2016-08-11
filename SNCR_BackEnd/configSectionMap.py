@@ -7,6 +7,13 @@ class ConfigSectionMap:
         Config = ConfigParser.ConfigParser()
         return Config
 
+    def GetConfigSections(self):
+        Config = self._get_config()
+        absPath = os.path.join(os.path.dirname(__file__), 'config.ini')
+        Config.read(absPath)
+
+        return Config.sections()
+
 
     def ConfigSectionMap(self,section):
         Config = self._get_config()
@@ -24,3 +31,4 @@ class ConfigSectionMap:
                 print("exception on %s!" % option)
                 dict1[option] = None
         return dict1
+
