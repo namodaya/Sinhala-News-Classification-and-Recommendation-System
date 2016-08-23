@@ -11,7 +11,7 @@ from SNCR_BackEnd.Aggregator.DAO import *
 
 class newsUpdater:
 
-    def job(self, link, newsContentClassName, imageClassName):
+    def job(self, link, newsContentClassName, imageClassName, section):
         db = connection.MySQLConnection(user='root', password='1234',
                                         host='127.0.0.1',
                                         database='NewsData',
@@ -26,9 +26,10 @@ class newsUpdater:
 
             length=len(entry['link'].split('/'))
 
-            sql1="SELECT * FROM NewsOrder WHERE newsId >= '%s'"%(entry['link'].split('/')[length-1])
+            sql1="SELECT * FROM NewsOrder WHERE newsId >= '%s' and newsSite= '%s'"%(entry['link'].split('/')[length-1],section)
             cursor.execute(sql1)
             result=cursor.fetchall()
+            print result
             if len(result)==0:
                 length = len(entry['link'].split('/'))
                 # converting title into a url
@@ -48,7 +49,7 @@ class newsUpdater:
 
                 newsContentRows = soup.find_all('div', attrs={"class": newsContentClassName})
                 dao = DAO()
-                dao.insertNews(entry['title'], entry['link'], entry['description'].split('<a')[0], imageDetails[2], 'null',entry['link'].split('/')[length - 1])
+                dao.insertNews(entry['title'], entry['link'], entry['description'].split('<a')[0], imageDetails[2], 'null',entry['link'].split('/')[length - 1],section)
 
             else:
                 print 'No new news'

@@ -27,7 +27,7 @@ class DAO:
 
         # Create table as per requirement
         sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT,
-                        title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), pubDate VARCHAR(1000), category VARCHAR(10)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
+                        title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), pubDate VARCHAR(1000), category VARCHAR(10), newsSite VARCHAR (80)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
         cursor.execute(sql)
 
     def getHotNews(self):
@@ -39,12 +39,12 @@ class DAO:
 
         return newsList
 
-    def insertNews(self,title,link,description,imgLink,category,newsId):
+    def insertNews(self,title,link,description,imgLink,category,newsId,newsSite):
         cursor = self._get_cursor()
-        sql = "INSERT INTO NewsOrder(title,link,description,imgLink,category,newsId) VALUES ('%s','%s','%s','%s','%s','%s') " %(
-            title, link, description, imgLink, category,newsId)
+        sql = """INSERT INTO NewsOrder(title,link,description,imgLink,category,newsId, newsSite) VALUES ('%s','%s','%s','%s','%s','%s','%s') """ %(title, link, description, imgLink, category,newsId,newsSite)
 
         cursor.execute(sql)
+        self.con.commit()
 
 
 

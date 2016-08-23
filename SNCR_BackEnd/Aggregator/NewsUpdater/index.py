@@ -15,10 +15,10 @@ def schedularRunner():
         newsContentClassName = configSectionMap.ConfigSectionMap(section)['newscontentclassname']
         imageClassName = configSectionMap.ConfigSectionMap(section)['imageclassname']
 
-        newsUpdater.job(link,newsContentClassName, imageClassName)
+        newsUpdater.job(link,newsContentClassName, imageClassName, section)
 
-schedule.every(60).minutes.do(schedularRunner)
+schedule.every(0.1).minutes.do(schedularRunner)
 
 while 1:
     schedule.run_pending()
-    time.sleep(60)
+    time.sleep(0.1)
