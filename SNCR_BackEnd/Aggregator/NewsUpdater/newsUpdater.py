@@ -29,7 +29,6 @@ class newsUpdater:
             sql1="SELECT * FROM NewsOrder WHERE newsId >= '%s' and newsSite= '%s'"%(entry['link'].split('/')[length-1],section)
             cursor.execute(sql1)
             result=cursor.fetchall()
-            print result
             if len(result)==0:
                 length = len(entry['link'].split('/'))
                 # converting title into a url
@@ -44,12 +43,14 @@ class newsUpdater:
                     soup = BeautifulSoup(res, "html.parser")
                 except:
                     print "Error"
-                imageRows = soup.find_all('div', attrs={"class": imageClassName})
-                imageDetails = re.findall('"([^"]*)"', str(imageRows))
+                imgsrc = soup.find_all(True, attrs={"class": imageClassName,"alt":entry['title'] })
 
-                newsContentRows = soup.find_all('div', attrs={"class": newsContentClassName})
+                patImgSrc = re.compile('src="(.*)".*/>')
+                findPatImgSrc = re.findall(patImgSrc, str(imgsrc))
+
+                newsContentRows = soup.find_all(True, attrs={"class": newsContentClassName})
                 dao = DAO()
-                dao.insertNews(entry['title'], entry['link'], entry['description'].split('<a')[0], imageDetails[2], 'null',entry['link'].split('/')[length - 1],section)
+                dao.insertNews(entry['title'], entry['link'], entry['description'], findPatImgSrc[0], 'null',entry['link'].split('/')[length - 1],section)
 
             else:
                 print 'No new news'
