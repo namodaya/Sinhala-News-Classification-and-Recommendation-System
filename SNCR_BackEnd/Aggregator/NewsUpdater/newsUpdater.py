@@ -43,15 +43,17 @@ class newsUpdater:
                     soup = BeautifulSoup(res, "html.parser")
                 except:
                     print "Error"
-                imgsrc = soup.find_all(True, attrs={"class": imageClassName,"alt":entry['title'] })
+
+                imgsrc = soup.find_all(True, attrs={"class": imageClassName })
+                if(imgsrc.__len__()!= 1):
+                    imgsrc = soup.find_all(True, attrs={"class": imageClassName,"alt":entry['title']})
 
                 patImgSrc = re.compile('src="(.*)".*/>')
                 findPatImgSrc = re.findall(patImgSrc, str(imgsrc))
-
                 newsContentRows = soup.find_all(True, attrs={"class": newsContentClassName})
                 dao = DAO()
                 dao.insertNews(entry['title'], entry['link'], entry['description'], findPatImgSrc[0], 'null',entry['link'].split('/')[length - 1],section)
 
             else:
-                print 'No new news'
+                print 'No new news in',section
 
