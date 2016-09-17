@@ -1,4 +1,5 @@
 import io
+import os
 
 from removeUnnecessaryChars import removeUnnecessaryChars
 from removeStopWords import removeStopwords
@@ -12,7 +13,7 @@ stemmObj = stemmer()
 # plainText = unnecessaryCharsObj.removeChars(title)
 # finalText = stopWrdsObj.removeStopwords(title)
 
-inputFile = "text"
+inputFile = os.path.dirname(os.path.abspath(__file__)) + "/text"
 outputFile = "plainText.txt"
 
 infile = io.open(inputFile, "r", encoding='utf-8').read()
