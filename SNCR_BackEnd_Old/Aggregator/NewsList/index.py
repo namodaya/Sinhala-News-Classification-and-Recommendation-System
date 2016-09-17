@@ -1,6 +1,6 @@
 import feedparser
 from flask_restful import Resource
-from SNCR_BackEnd.Aggregator.DAO import *
+from SNCR_BackEnd_Old.Aggregator.DAO import *
 
 
 class main(Resource):

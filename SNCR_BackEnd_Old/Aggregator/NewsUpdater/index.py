@@ -1,8 +1,8 @@
 import schedule
 import time
 
-from SNCR_BackEnd.configSectionMap import *
-from SNCR_BackEnd.Aggregator.NewsUpdater.newsUpdater import *
+from SNCR_BackEnd_Old.configSectionMap import *
+from SNCR_BackEnd_Old.Aggregator.NewsUpdater.newsUpdater import *
 
 configSectionMap = ConfigSectionMap()
 newsUpdater = newsUpdater()

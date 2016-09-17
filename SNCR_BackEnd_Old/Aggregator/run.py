@@ -8,8 +8,6 @@ from flask import session
 
 
 from NewsList.index import *
-from Authentication import *
-from UserData.newsRecords import *
 
 app = flask.Flask(__name__)
 app.secret_key = os.urandom(24)

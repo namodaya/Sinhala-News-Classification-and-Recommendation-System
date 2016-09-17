@@ -7,7 +7,7 @@ import urllib2 as urllib2
 from bs4 import BeautifulSoup
 # from mysql import (connection)
 from mysql.connector import (connection)
-from SNCR_BackEnd.Aggregator.DAO import *
+from SNCR_BackEnd_Old.Aggregator.DAO import *
 
 class newsUpdater:
 
