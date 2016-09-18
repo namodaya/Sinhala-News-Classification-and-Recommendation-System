@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import re
 
 class removeUnnecessaryChars():
@@ -7,3 +8,14 @@ class removeUnnecessaryChars():
         plaiText = cyril.sub('', text)
 
         return plaiText
+=======
+import re
+
+class removeUnnecessaryChars():
+    def removeChars(self, text):
+        cyril = re.compile(u'[\u0021-\u007F]', re.UNICODE)
+
+        plaiText = cyril.sub('', text)
+
+        return plaiText
+>>>>>>> upstream/master
