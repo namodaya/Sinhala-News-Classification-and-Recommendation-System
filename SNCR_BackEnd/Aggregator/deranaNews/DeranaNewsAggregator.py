@@ -1,11 +1,10 @@
 import urllib2
 from bs4 import BeautifulSoup
-
 import re
 
 from SNCR_BackEnd.Aggregator.news.NewsAggregator import NewsAggregator
 
-class HirunNewsAggregator(NewsAggregator):
+class DeranaNewsAggregator(NewsAggregator):
 
     def setDescription(self, news, entry):
         url = entry['link']
@@ -15,17 +14,12 @@ class HirunNewsAggregator(NewsAggregator):
             soup = BeautifulSoup(res, "html.parser")
         except:
             print "Error"
-        description = soup.find_all(True, attrs={"class": "lts-txt2"})
+        description = soup.find_all(True, attrs={"class": "newsContent"})
         news.description = description[0]
         print "description sussefully fetched"
 
-    def setLink(self, news, entry):
-        url = entry['link']
-        news.link = url+'/'+news.title.replace(" ", "")
-        print "news link sussefully fetched"
-
     def setNewsSite(self, news):
-        news.newsSite = "HiruNews"
+        news.newsSite = "DeranaNews"
         print "news site sussefully fetched"
 
     def setImageLink(self, news, entry):
@@ -36,11 +30,11 @@ class HirunNewsAggregator(NewsAggregator):
             soup = BeautifulSoup(res, "html.parser")
         except:
             print "Error"
-        imgsrc = soup.find_all(True, attrs={"class": "latest-pic"})
+
+        imgsrc = soup.find_all(True, attrs={"class": "img-responsive"})
         patImgSrc = re.compile('src="(.*)".*/>')
-        findPatImgSrc = re.findall(patImgSrc, str(imgsrc))
+        findPatImgSrc = re.findall(patImgSrc, str(imgsrc[5]))
         news.imageLink = findPatImgSrc[0]
         print "image link sussefully fetched"
-
 
 
