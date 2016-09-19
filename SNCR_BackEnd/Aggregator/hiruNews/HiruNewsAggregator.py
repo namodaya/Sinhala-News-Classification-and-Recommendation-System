@@ -16,7 +16,7 @@ class HirunNewsAggregator(NewsAggregator):
         except:
             print "Error"
         description = soup.find_all(True, attrs={"class": "lts-txt2"})
-        news.description = description[0]
+        news.description = description
         print "description sussefully fetched"
 
     def setLink(self, news, entry):

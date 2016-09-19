@@ -62,7 +62,7 @@ class MultinomialNBClassifier:
     def classify(self, newsList):
 
         for news in newsList:
-            description = news.title
+            description = news.description
             # print description
             # wf = io.open(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'Classifier\\newsGroups\\news.txt'), 'w')
             # x = unicode(description, "utf-8")
