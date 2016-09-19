@@ -12,40 +12,54 @@ class NewsAggregator:
     def setTitle(self,news,entry):
         title = entry['title']
         news.title = title
-        return news
+        print "title sussefully fetched"
 
+    @abstractmethod
     def setLink(self,news,entry):
         url = entry['link']
         news.link = url
         return news
 
     @abstractmethod
-    def setDescription(self, news):
+    def setSummary(self, news, entry):
+        summary = entry['description']
+        summaryArray = summary.split("<")
+        news.summary = summaryArray[0]
+        print "summary sussefully fetched"
+
+    @abstractmethod
+    def setDescription(self, news,entry):
         pass
 
     @abstractmethod
-    def imageLink(self, news):
-        pass
-
-    @abstractmethod
-    def setPublishDate(self, news):
+    def setImageLink(self, news,entry):
         pass
 
     @abstractmethod
     def setNewsSite(self, news):
         pass
 
+    def setPublishDate(self, news,entry):
+        date = entry['published']
+        news.publishDate = date
+        print "publish date sussefully fetched"
+
     def aggriagteNews(self,link):
 
-        aggrigater = NewsAggregator()
         print("Scheduler is running.......")
         feed = feedparser.parse(link)
         for entry in feed['items']:
             news = News()
-            aggrigater.setTitle(news,entry)
+            self.setTitle(news,entry)
+            self.setLink(news,entry)
+            self.setSummary(news,entry)
+            self.setDescription(news, entry)
+            self.setImageLink(news, entry)
+            self.setNewsSite(news)
+            self.setPublishDate(news, entry)
 
-            aggrigater.newsList.append(news)
+            self.newsList.append(news)
 
-        return aggrigater.newsList
+        return self.newsList
 
 
