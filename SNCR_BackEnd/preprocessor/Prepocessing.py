@@ -1,9 +1,9 @@
 import io
 import os
 
-from SNCR_BackEnd.preprocessor.removingStopWords.RemovingStopWords import RemovingStopWords
-from SNCR_BackEnd.preprocessor.removingUnnecessaryChars.removeUnnecessaryChars import removeUnnecessaryChars
-from SNCR_BackEnd.preprocessor.stemming.StemmingSinhala import StemmingSinhala
+from SNCR_BackEnd.Preprocessor.removingStopWords.RemovingStopWords import RemovingStopWords
+from SNCR_BackEnd.Preprocessor.removingUnnecessaryChars.removeUnnecessaryChars import removeUnnecessaryChars
+from SNCR_BackEnd.Preprocessor.stemming.StemmingSinhala import StemmingSinhala
 
 class Prepocessing():
 

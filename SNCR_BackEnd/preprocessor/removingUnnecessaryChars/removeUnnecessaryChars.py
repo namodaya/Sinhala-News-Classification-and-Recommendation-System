@@ -7,3 +7,4 @@ class removeUnnecessaryChars():
         plaiText = cyril.sub('', text)
 
         return plaiText
+
