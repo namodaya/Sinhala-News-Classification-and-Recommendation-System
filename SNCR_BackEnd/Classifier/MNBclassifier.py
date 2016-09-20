@@ -51,7 +51,7 @@ class MultinomialNBClassifier:
         # economy = 2
         # culture = 3
         # politics = 4
-        y_train=['sports','defence','economy','culture','political'];
+        y_train=['sports','defence','economics','culture','political'];
 
         #Train classifier
         clf.fit(X_train, y_train)
