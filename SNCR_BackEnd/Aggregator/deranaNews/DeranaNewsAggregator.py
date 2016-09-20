@@ -37,4 +37,12 @@ class DeranaNewsAggregator(NewsAggregator):
         news.imageLink = findPatImgSrc[0]
         print "image link sussefully fetched"
 
+    def setSummary(self, news, entry):
+        summary = entry['description']
+        # print summary
+        summaryArray = summary.split(">")
+        news.summary = summaryArray[1]
+        print news.summary
+        print "summary sussefully fetched"
+
 
