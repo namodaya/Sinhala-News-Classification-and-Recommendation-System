@@ -6,11 +6,6 @@ class RemovingStopWords:
         infile = os.path.dirname(os.path.abspath(__file__)) + "/../resources/stopWordList.txt"
         fin = io.open(infile, "r", encoding='utf-8').read().replace('\n',' ')
 
-        for w in fin:
-            print w
-        print '!!!!!!!!!!!!!!!!!!!!!!!!!+++++++++'
-        print text
-
         # print fin
         text = text.lower()
         words = text.split()

@@ -70,7 +70,7 @@ class DAO:
 
     def selectLast(self,newsSite):
         cursor = self._get_cursor()
-        sql = "SELECT pubDate FROM NewsOrder WHERE newsSite='%s' ORDER BY ID DESC LIMIT 1"%(newsSite)
+        sql = "SELECT pubDate FROM NewsOrder WHERE newsSite='%s' ORDER BY pubDate DESC LIMIT 1"%(newsSite)
         cursor.execute(sql)
         latestNews = cursor.fetchall()
         cursor.close()

@@ -1,6 +1,3 @@
-import io
-import os
-
 from SNCR_BackEnd.Preprocessor.removingStopWords.RemovingStopWords import RemovingStopWords
 from SNCR_BackEnd.Preprocessor.removingUnnecessaryChars.removeUnnecessaryChars import removeUnnecessaryChars
 from SNCR_BackEnd.Preprocessor.stemming.StemmingSinhala import StemmingSinhala
@@ -17,10 +14,10 @@ class Prepocessing():
             stopWrdsObj = RemovingStopWords()
             stemmObj = StemmingSinhala()
 
-            text = unnecessaryCharsObj.removeChars(description)
-            # text = stopWrdsObj.removeStopwords(text)
+            reomveCharsText = unnecessaryCharsObj.removeChars(description)
+            # removeStopWordText = stopWrdsObj.removeStopwords(reomveCharsText)
             #
-            # text = text.lower()
+            # text = reomveCharsText.lower()
             # plain = text.split()
             # stemmObj.stemminig(plain)
             #
@@ -29,6 +26,6 @@ class Prepocessing():
             # for x in plain:
             #     plainText = plainText+" "+x
 
-            news.description = text
+            news.description = reomveCharsText
 
         return newsList
