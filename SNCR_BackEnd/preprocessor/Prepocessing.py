@@ -7,22 +7,28 @@ from SNCR_BackEnd.Preprocessor.stemming.StemmingSinhala import StemmingSinhala
 
 class Prepocessing():
 
-    def prepocessor(self,description):
+    def prepocessor(self,newsList):
 
-        unnecessaryCharsObj = removeUnnecessaryChars()
-        stopWrdsObj = RemovingStopWords()
-        stemmObj = StemmingSinhala()
+        for news in newsList:
 
-        text = unnecessaryCharsObj.removeChars(description)
-        text = stopWrdsObj.removeStopwords(text)
+            description = news.description
 
-        text = text.lower()
-        plain = text.split()
-        stemmObj.stemminig(plain)
+            unnecessaryCharsObj = removeUnnecessaryChars()
+            stopWrdsObj = RemovingStopWords()
+            stemmObj = StemmingSinhala()
 
-        plainText=""
+            text = unnecessaryCharsObj.removeChars(description)
+            # text = stopWrdsObj.removeStopwords(text)
+            #
+            # text = text.lower()
+            # plain = text.split()
+            # stemmObj.stemminig(plain)
+            #
+            # plainText=""
+            #
+            # for x in plain:
+            #     plainText = plainText+" "+x
 
-        for x in plain:
-            plainText = plainText+" "+x
+            news.description = text
 
-        return plainText
+        return newsList

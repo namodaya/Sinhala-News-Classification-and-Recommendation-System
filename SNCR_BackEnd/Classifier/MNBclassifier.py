@@ -51,7 +51,7 @@ class MultinomialNBClassifier:
         # economy = 2
         # culture = 3
         # politics = 4
-        y_train=[0,1,2,3,4];
+        y_train=['sports','defence','economy','culture','political'];
 
         #Train classifier
         clf.fit(X_train, y_train)
@@ -62,17 +62,11 @@ class MultinomialNBClassifier:
     def classify(self, newsList):
 
         for news in newsList:
+
             description = news.description
-            # print description
-            # wf = io.open(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'Classifier\\newsGroups\\news.txt'), 'w')
-            # x = unicode(description, "utf-8")
-            # wf.write('zzzzzzzz')
-            # wf.close()
-            # rf = io.open(os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'Classifier\\newsGroups\\news.txt'), 'r', encoding='utf-8').read()
             category = MultinomialNBClassifier().classifier(description)
-
-            print category,description
-
             news.category = category
+
+            print description, category
 
         # return newsList
