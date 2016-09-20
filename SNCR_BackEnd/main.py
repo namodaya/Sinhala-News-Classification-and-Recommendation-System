@@ -9,9 +9,9 @@ preprocessor = Prepocessing()
 
 dao.selectLast('hirunews')
 
-aggrigater = HirunNewsAggregator()
+aggrigater = DeranaNewsAggregator()
 classifier = MultinomialNBClassifier()
-list = aggrigater.aggriagteNews("http://www.hirunews.lk/rss/sinhala.xml")
+list = aggrigater.aggriagteNews("http://sinhala.adaderana.lk/rsshotnews.php")
 
 
 # for i in list:
