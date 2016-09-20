@@ -22,10 +22,7 @@ class NewsAggregator:
 
     @abstractmethod
     def setSummary(self, news, entry):
-        summary = entry['description']
-        summaryArray = summary.split("<")
-        news.summary = summaryArray[0]
-        print "summary sussefully fetched"
+        pass
 
     @abstractmethod
     def setDescription(self, news,entry):

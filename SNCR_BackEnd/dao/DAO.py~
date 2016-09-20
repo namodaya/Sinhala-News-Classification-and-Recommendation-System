@@ -3,7 +3,7 @@ from mysql.connector import (connection)
 class DAO:
 
     def _connect(self):
-        self.con = connection.MySQLConnection(user='root', password='',
+        self.con = connection.MySQLConnection(user='root', password='ilovepera',
                                     host='127.0.0.1',
                                     database='NewsDB',
                                     charset='utf8')
@@ -70,11 +70,11 @@ class DAO:
 
     def selectLast(self,newsSite):
         cursor = self._get_cursor()
-        sql = "SELECT pubDate FROM NewsOrder WHERE newsSite='%s' ORDER BY ID DESC LIMIT 1"%(newsSite)
+        sql = "SELECT ID FROM newsorder WHERE newsSite='%s' ORDER BY ID DESC LIMIT 1"%(newsSite)
         cursor.execute(sql)
         latestNews = cursor.fetchall()
         cursor.close()
-        return latestNews[0][0]
+        print latestNews
 
 
 
