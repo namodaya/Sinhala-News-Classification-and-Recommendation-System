@@ -67,6 +67,4 @@ class MultinomialNBClassifier:
             category = MultinomialNBClassifier().classifier(description)
             news.category = category
 
-            print description, category
-
         # return newsList
