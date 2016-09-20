@@ -7,12 +7,19 @@ from SNCR_BackEnd.Preprocessor.Prepocessing import *
 dao = DAO()
 preprocessor = Prepocessing()
 
-dao.selectLast('hirunews')
+latestNews = dao.selectLast('derananews')
 
 aggrigater = DeranaNewsAggregator()
 classifier = MultinomialNBClassifier()
 list = aggrigater.aggriagteNews("http://sinhala.adaderana.lk/rsshotnews.php")
 
+print 'latest news     ++++++'
+print latestNews
+
+for news in list:
+    print news.publishDate
+    if news.publishDate==latestNews:
+        print 'Yes yes yes'
 
 # for i in list:
 #     print i.description
