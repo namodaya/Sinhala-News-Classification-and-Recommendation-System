@@ -5,7 +5,7 @@ class DAO:
     def _connect(self):
         self.con = connection.MySQLConnection(user='root', password='',
                                     host='127.0.0.1',
-                                    database='NewsData',
+                                    database='NewsDB',
                                     charset='utf8')
         return
 
@@ -27,7 +27,7 @@ class DAO:
 
         # Create table as per requirement
         sql = """CREATE TABLE NewsOrder (ID int NOT NULL AUTO_INCREMENT,
-                        title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000), pubDate VARCHAR(1000), category VARCHAR(10), newsSite VARCHAR (80)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
+                        title  VARCHAR(1000), link  VARCHAR(1000), description VARCHAR(1000),imgLink VARCHAR(1000), pubDate VARCHAR(1000), category VARCHAR(10), newsSite VARCHAR (80), PRIMARY KEY(ID)) ENGINE = InnoDB DEFAULT CHARSET=utf8"""
         cursor.execute(sql)
 
     def getHotNews(self):
@@ -39,9 +39,12 @@ class DAO:
 
         return newsList
 
-    def insertNews(self,title,link,description,imgLink,category,newsId,newsSite):
+    def insertNews(self,title,link,description,imgLink,pubDate,category,newsSite):
         cursor = self._get_cursor()
-        sql = """INSERT INTO NewsOrder(title,link,description,imgLink,category,newsId, newsSite) VALUES ('%s','%s','%s','%s','%s','%s','%s') """ %(title, link, description, imgLink, category,newsId,newsSite)
+        # print type(link)
+        # print type(title)
+        # print type(description)
+        sql = """INSERT INTO NewsOrder(title,link,description,imgLink,pubDate,category,newsSite) VALUES ('%s','%s','%s','%s','%s','%s','%s') """ %(title, link, description, imgLink, pubDate, category,newsSite)
 
         cursor.execute(sql)
         self.con.commit()
