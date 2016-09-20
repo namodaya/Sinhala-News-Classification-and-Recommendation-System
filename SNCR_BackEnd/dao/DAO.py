@@ -58,13 +58,24 @@ class DAO:
 
         return newsList
 
-
-    def insertNews(self,title,link,description,imgLink,category,newsId,newsSite):
+    def insertNews(self, title, link, description, imgLink, pubDate, category, newsSite):
         cursor = self._get_cursor()
-        sql = """INSERT INTO NewsOrder(title,link,description,imgLink,category,newsId, newsSite) VALUES ('%s','%s','%s','%s','%s','%s','%s') """ %(title, link, description, imgLink, category,newsId,newsSite)
+        # print type(link)
+        # print type(title)
+        # print type(description)
+        sql = """INSERT INTO NewsOrder(title,link,description,imgLink,pubDate,category,newsSite) VALUES ('%s','%s','%s','%s','%s','%s','%s') """ % (
+        title, link, description, imgLink, pubDate, category, newsSite)
 
         cursor.execute(sql)
         self.con.commit()
+
+    def selectLast(self, newsSite):
+        cursor = self._get_cursor()
+        sql = "SELECT ID FROM newsorder WHERE newsSite='%s' ORDER BY ID DESC LIMIT 1" % (newsSite)
+        cursor.execute(sql)
+        latestNews = cursor.fetchall()
+        cursor.close()
+        print latestNews
 
 
 
