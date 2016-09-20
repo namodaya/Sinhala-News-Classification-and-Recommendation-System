@@ -4,13 +4,17 @@ import os
 class RemovingStopWords:
     def removeStopwords(self, text):
         infile = os.path.dirname(os.path.abspath(__file__)) + "/../resources/stopWordList.txt"
-        fin = io.open(infile, "r", encoding='utf-8').read()
+        fin = io.open(infile, "r", encoding='utf-8').read().replace('\n',' ')
+
+        for w in fin:
+            print w
+        print '!!!!!!!!!!!!!!!!!!!!!!!!!+++++++++'
+        print text
 
         # print fin
         text = text.lower()
         words = text.split()
         words.sort()
-
 
         for word in words:
             if word in fin:
