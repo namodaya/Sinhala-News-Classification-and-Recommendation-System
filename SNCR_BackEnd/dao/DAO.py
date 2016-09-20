@@ -3,7 +3,7 @@ from mysql.connector import (connection)
 class DAO:
 
     def _connect(self):
-        self.con = connection.MySQLConnection(user='root', password='1234',
+        self.con = connection.MySQLConnection(user='root', password='ilovepera',
                                     host='127.0.0.1',
                                     database='NewsData',
                                     charset='utf8')
@@ -38,6 +38,26 @@ class DAO:
         cursor.close()
 
         return newsList
+
+    def getDefenseAndLawNews(self):
+        cursor = self._get_cursor()
+        sql = "select * from NewsOrder where category='defence'"
+        cursor.execute(sql)
+        newsList = cursor.fetchall()
+        cursor.close()
+
+        return newsList
+
+    def getNews(self , category):
+        cursor = self._get_cursor()
+        sql = "select * from NewsOrder where category="+"'"+category+"'"
+        print sql
+        cursor.execute(sql)
+        newsList = cursor.fetchall()
+        cursor.close()
+
+        return newsList
+
 
     def insertNews(self,title,link,description,imgLink,category,newsId,newsSite):
         cursor = self._get_cursor()
